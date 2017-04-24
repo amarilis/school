@@ -1,0 +1,59 @@
+.calendarOut{
+    min-width: 260px;
+}
+/* Таблица календарика */
+.calendar {
+    border: 1px solid #909090;
+    border-collapse: collapse;
+    font-family: Arial;
+    font-size: 14px;
+}
+/* Заголовок */
+.calendar th {
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    background: #D0D0D0;
+    color: #000000;
+    border: 1px solid #909090;
+}
+/* Заголовок праздника */
+.calendar th.holiday {
+    color: #FF0000;
+}
+/* Ячейка дня */
+.calendar td {
+    text-align: right;
+    width: 28px;
+    height: 36px;
+    padding-right: 8px;
+    border: 1px solid #909090;
+    text-align: right;
+    cursor: pointer;
+}
+.calendar td:hover{
+    background-color: rgba(45, 114, 217,.7);
+    color: #f1f1f1;
+}
+    /* Затемненный день */
+.calendar td.grayed {
+    background: #F0F0F0;
+    cursor: auto !important;
+}
+/* Выбранный день */
+.calendar td.selected {
+    color: #f1f1f1;
+    background-color: #2d72d9;
+}
+/* Праздничный день */
+.calendar td.holiday {
+    color: #FF0000;
+}
+/* Кнопки навигации */
+.calendar td.navigation {
+    text-align: center;
+    border: 0px none !important;
+    font-size: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+}

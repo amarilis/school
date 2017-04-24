@@ -1,0 +1,22 @@
+[
+  {
+    "schoolName": "Разработки интерфейсов",
+    "studentsCount": "23",
+    "Id": "1"
+  },
+  {
+    "schoolName": "Мобильной разработки",
+    "studentsCount": "33",
+    "Id": "2"
+  },
+  {
+    "schoolName": "Мобильного дизайна",
+    "studentsCount": "25",
+    "Id": "3"
+  },
+  {
+    "schoolName": "Новая школа",
+    "studentsCount": "50",
+    "Id": "4"
+  }
+]

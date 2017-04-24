@@ -1,0 +1,21 @@
+doctype html
+html(lang="ru")
+	head
+		title= title
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+		link(rel="stylesheet", href="css/style.css")
+		link(rel="stylesheet", href="css/calendar.css")
+	body
+		div.b-filter.block_content
+			include filter
+		div.b-adminstiration.block_content
+			div.button.b-adminstiration__button Режим администрирования
+			div.b-adminstiration__edit
+				include admin
+		div.b-schedule.block_content
+			block content
+		script(src="js/main.js")
+		script(src="js/popup.js")
+		script(src="js/calendar.js")
+		script(src="js/api.js")

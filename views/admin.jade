@@ -1,0 +1,102 @@
+br
+div.button.adminstiration__add_lectures.adminstiration__add_lectures-hide Добавить лекцию
+div.b-schedule__item.adminstiration__add_lectures_place
+    div.b-schedule__section.b-add-edit-lectures.b-add-edit-lectures-1
+        div.schedule__item
+            h3
+                span.adminstiration__add_add-title.adminstiration__add_title-show Добавление
+                span.adminstiration__add_edit-title.adminstiration__add_title-hide Редактирование
+                span.adminstiration__add_lectures-title лекции
+        div.schedule__item.schedule__item_mobile-none
+        div.schedule__item.schedule__item_mobile-none
+        div.schedule__item.schedule__item_mobile-none
+    div.b-schedule__section.b-add-edit-lectures.b-add-edit-lectures-2
+        div.schedule__item.schedule__item_valign-top.schedule__school
+            select.select__item.adminstiration__add_school
+                option Все школы
+                - each school in schools
+                    option= school.schoolName
+        div.schedule__item.schedule__item_valign-top.schedule__theme
+            textarea.textarea.textarea_lecturesName(name="lecturesName", placeholder="Тема лекции", data-id=lectures.length+1)
+            input.input_lectures_id(type="hidden", name="Id", value=lectures.length+1)
+            div.input_title Ссылка на видео
+            input.input.adminstiration__add_video(type="text", value=lectures.videoLink)
+            div.input_title Ссылка на презентацию
+            input.input.adminstiration__add_presentation(type="text", value=lectures.presentation)
+        div.schedule__item.schedule__item_valign-top.schedule__reader
+            select.select__item.adminstiration__add_readers
+                option Все лекторы
+                - each reader in readers
+                    option= reader.readerName
+        div.schedule__item.schedule__item_valign-top.schedule__block_date
+            input.input.input_date.adminstiration__add_date(type="text", name="date", placeholder="дд.мм.гггг")
+            input.input.input_time.adminstiration__add_time(type="text", name="time", placeholder="чч:мм-чч:мм", value="12:30-15:30")
+            select.select__item.adminstiration__add_rooms
+                option Все классы
+                - each room in rooms
+                    option= room.roomName
+    div.b-schedule__section.b-add-edit-lectures.b-add-edit-lectures-3
+        div.schedule__item.schedule__item_mobile-none
+        div.schedule__item.schedule__item_mobile-none
+        div.schedule__item.schedule__item_mobile-none
+        div.schedule__item
+            div.after_float_block
+                input.button.button_submit.submit_add_lectures(type="submit",value="Отправить")
+
+
+br
+div.after_float_block
+    form(name="adminstiration__add_edit_schools")
+        h3 Добавление/редактирование школы
+        div.b-schedule__item
+            div.b-schedule__section
+                div.schedule__item
+                    label
+                        input.input_checkbox.input_checkbox-choose(type="checkbox")
+                        span.input_checkbox_label_span Добавить школу
+                    select.select__item.adminstiration__add_edit_school
+                        option(students-count="", title="", data-id=schools.length+1) Все школы
+                        - each school in schools
+                            option(students-count=school.studentsCount, title=school.schoolName, data-id=school.Id)= school.schoolName
+                div.schedule__item
+                    h4 Название школы
+                    input.input.input_school_title(type="text", name="schoolName", maxlength="200", placeholder="Новая школа")
+                    input.input_school_Id.input_Id(type="hidden", name="Id", value=schools.length+1)
+                - var arrCapacityRooms = []
+                - each room in rooms
+                    - arrCapacityRooms.push(+room.capacity)
+                - var arrCapacityRoomsMax = Math.max.apply(null, arrCapacityRooms)
+                div.schedule__item
+                    h4 Количество студентов
+                    input.input.input_number.input_school_count_students(type="text", name="studentsCount", maxlength="3", placeholder="000" max=arrCapacityRoomsMax)
+        input.button.button_submit.submit_add_school(type="submit",value="Отправить")
+br
+div.after_float_block
+    form(name="adminstiration__add_edit_rooms")
+        h3 Добавление/редактирование класса
+        div.b-schedule__item
+            div.b-schedule__section
+                div.schedule__item
+                    label
+                        input.input_checkbox.input_checkbox-choose(type="checkbox")
+                        span.input_checkbox_label_span Добавить класс
+                    select.select__item.adminstiration__add_edit_rooms
+                        option(capacity="", locate="", title="" data-id=rooms.length+1) Все классы
+                        - each room in rooms
+                            option(capacity=room.capacity, locate=room.locate, title=room.roomName, data-id=room.Id)= room.roomName
+                div.schedule__item
+                    h4 Название
+                    input.input.input_rooms_title(type="text", name="roomName", placeholder="Новый класс")
+                    input.input_rooms_Id.input_Id(type="hidden", name="Id", value=rooms.length+1)
+                - var countStudents = []
+                - each school in schools
+                    - countStudents.push(+school.studentsCount)
+                - var countStudentsMax = Math.max.apply(null, countStudents)
+                div.schedule__item
+                    h4 Вместимость
+                    input.input.input_number.input_rooms_capacity(type="text", name="capacity", maxlength="3", placeholder="000" max=countStudentsMax)
+                div.schedule__item
+                    h4 Расположение
+                    input.input.input_rooms_locate(type="text", name="locate", placeholder="0й этаж")
+        input.button.button_submit.submit_add_rooms(type="submit",value="Отправить")
+br

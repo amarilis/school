@@ -1,0 +1,56 @@
+extends layout
+
+block content
+
+	div.b-schedule__item
+		div.b-schedule__section.b-schedule__section-header
+			div.schedule__item.schedule__school
+				div.schedule__school-header Школа
+			div.schedule__item.schedule__theme
+				div.schedule__school-header Тема лекции
+			div.schedule__item.schedule__reader
+				div.schedule__school-header Лектор
+			div.schedule__item.schedule__block_date
+				div.schedule__school-header Дата
+
+	div.b-schedule__sort
+		div.search_nothing_found Ничего не найдено, попробуйте изменить запрос поиска
+		- var nowDate = new Date();
+		- each lecture in lectures
+
+			div(class=(nowDate > lecture.date ? "b-schedule__section b-schedule__section_ended" : "b-schedule__section"))
+				div.schedule__item.schedule__school.schedule__school_data(date_time='{'+'"roomName"'+':"'+lecture.roomName+'","time":"'+lecture.time+'","date":"'+lecture.date+'"}')
+					- each school in lecture.schoolName
+						div= school
+				div.schedule__item.schedule__theme
+					div.button.schedule__theme_edit Edit
+					span.span_lecturesName(data-id=lecture.Id)= lecture.lecturesName
+				div.schedule__item.schedule__reader
+
+					- each lecReaderName in lecture.readerName
+						- each reader in readers
+							if reader.readerName == lecReaderName
+								- var tooltip = reader.readerAbout
+								div.js-schedule__show_tooltip.js-schedule__show_tooltip-presence
+									span.js-schedule__show_tooltip-reader(data-tooltip= tooltip)= lecReaderName
+
+				div.schedule__item.schedule__block_date(data-date=lecture.date)
+					div.schedule__block_date-date
+						- var month = new Date(+lecture.date).getMonth()+1
+						- if (month.toString().slice().length == 1) month = '0'+month
+						- var day = new Date(+lecture.date).getDate()
+						- if (day.toString().slice().length == 1) day = '0'+day
+						- var date = day + '.' + month + '.' + new Date(+lecture.date).getFullYear();
+						=date
+					div.schedule__block_date-time
+						=lecture.time
+					div.schedule__block_date-place= lecture.roomName
+					if nowDate > lecture.date
+						div.schedule__block_date-buttons
+							if lecture.presentation
+								a.schedule__date-action.schedule__date-action-type_download(href=lecture.presentation) Скачать
+							if lecture.videoLink
+								a.schedule__date-action.schedule__date-action-type_watch(href=lecture.videoLink) Смотреть
+
+
+

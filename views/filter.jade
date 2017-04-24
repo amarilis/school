@@ -1,0 +1,75 @@
+h3 Фильрт
+br
+div.after_float_block
+    h4
+        span.filter_title Фильрт по строке
+    div.b-schedule__item.b-schedule__item_filter_hide
+        div.b-schedule__section
+            div.schedule__item
+                input.input.search__input(type="text", placeholder="Введите запрос")
+
+br
+div.after_float_block
+    h4
+        span.filter_title Фильрт по школам или лекторам или дате
+    div.b-schedule__item.b-schedule__item_filter_hide
+        div.b-schedule__section
+            div.schedule__item
+                select.select__item.select__item-school
+                    option Все школы
+                    - each school, index in schools
+                        option= school.schoolName
+            div.schedule__item
+                select.select__item.select__item-reader
+                    option Все лекторы
+                    //- Функция unique(arr) убирает из массива дублирующие значения
+                    - function unique(arr) { var obj = {}; for (var i = 0; i < arr.length; i++) { obj[arr[i]] = true; } return Object.keys(obj); }
+                    - var arrReaders = [];
+                    - each lecture in lectures
+                        - arrReaders.push(lecture.readerName)
+                    - var arrReadersNews = unique(arrReaders.toString().split(','))
+                    - each arrReadersNew in arrReadersNews
+                        option= arrReadersNew
+            div.schedule__item
+                select.select__item.select__item-date
+                    option Сортировка по дате
+                    option По возрастанию
+                    option По убыванию
+                    option Только прошедшие
+                    option Только будущие
+
+br
+div.after_float_block
+    h4
+        span.filter_title Фильрт по школам в заданный интервал дат
+    div.b-schedule__item.b-schedule__item_filter_hide
+        div.b-schedule__section
+            div.schedule__item
+                select.select__item.filter__select_school-date
+                    option Все школы
+                    - each school, index in schools
+                        option= school.schoolName
+            div.schedule__item
+                input.input.input_date.filter__school-date_input_date-start(type="text", placeholder="дд.мм.гггг")
+            div.schedule__item
+                input.input.input_date.filter__school-date_input_date-end(type="text", placeholder="дд.мм.гггг")
+            div.schedule__item
+                input.button.button_width-all.filter__school-date(type="submit", value="Показать")
+
+br
+div.after_float_block
+    h4
+        span.filter_title Фильрт по классам в заданный интервал дат
+    div.b-schedule__item.b-schedule__item_filter_hide
+        div.b-schedule__section
+            div.schedule__item
+                select.select__item.filter__select_room-date
+                    option Все комнаты
+                    - each room in rooms
+                        option= room.roomName
+            div.schedule__item
+                input.input.input_date.filter__room-date_input_date-start(type="text", placeholder="дд.мм.гггг")
+            div.schedule__item
+                input.input.input_date.filter__room-date_input_date-end(type="text", placeholder="дд.мм.гггг")
+            div.schedule__item
+                input.button.button_width-all.filter__room-date(type="submit",value="Показать")
